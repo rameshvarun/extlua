@@ -1,0 +1,7 @@
+flags: {}
+extra-package-dbs: []
+packages:
+- '.'
+extra-deps:
+- alex-tools-0.1.1.0
+resolver: lts-7.12
