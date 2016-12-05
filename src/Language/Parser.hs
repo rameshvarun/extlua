@@ -7,12 +7,42 @@ module Language.Parser where
 
   import Control.Monad (void)
 
-  whitespace :: Parser ()
-  whitespace = void $ many $ oneOf " \n\t\r\f"
+  skippable :: Parser ()
+  skippable = choice [singleLineComment, spaces]
 
-  breakStatement :: Parser Statement
-  breakStatement = do
+  singleLineComment :: Parser ()
+  singleLineComment = do
+    string "--"
+    manyTill anyChar (try endOfLine)
+    return ()
+
+  break :: Parser Statement
+  break = do
     start <- getPosition
     string "break"
     end <- getPosition
-    return BreakStatement (SourceRange start end)
+    return (Break (SourceRange start end))
+
+  statement :: Parser Statement
+  statement = choice [Language.Parser.break]
+
+  nil :: Parser Expression
+  nil = do
+    start <- getPosition
+    string "nil"
+    end <- getPosition
+    return (Nil (SourceRange start end))
+
+  primaryExpression :: Parser Expression
+  primaryExpression = choice [nil]
+
+  expression = primaryExpression
+
+  returnStatement :: Parser Return
+  returnStatement = do
+    start <- getPosition
+    string "return"
+    skippable
+    expr <- expression
+    end <- getPosition
+    return (Return (SourceRange start end) expr)
