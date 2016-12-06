@@ -70,6 +70,22 @@ data Token
   | TokUntermString       -- ^ unterminated string
   | TokUntermComment      -- ^ unterminated comment
   | TokUnexpected         -- ^ unexpected character
+
+  -- AssignOp Extension
+  | TokPlusEquals         -- ^+=
+  | TokMinusEquals        -- ^-=
+  | TokStarEquals         -- ^*=
+  | TokSlashEquals        -- ^/=
+  | TokPercentEquals      -- ^%=
+  | TokExpEquals          -- ^^=
+  | TokDDotEquals         -- ^..=
+  | TokOrEquals           -- ^or=
+  | TokAndEquals          -- ^and=
+
+  -- AssignOps for Lua 5.3
+  -- | TokDSlashEquals       -- //=
+  -- | TokAmpersandEquals    -- &=
+  -- | TokPipeEquals         -- |=
     deriving Eq
 
 instance Show Token where
@@ -141,3 +157,14 @@ instance Show Token where
     show TokUntermString  = "unterminated_string"
     show TokUntermComment = "unterminated_comment"
     show TokUnexpected    = "unexpected_character"
+
+    -- AssignOp Extension
+    show TokPlusEquals    = "`+=`"
+    show TokMinusEquals   = "`-=`"
+    show TokStarEquals    = "`*=`"
+    show TokSlashEquals   = "`/=`"
+    show TokPercentEquals = "`%=`"
+    show TokExpEquals     = "`^=`"
+    show TokDDotEquals    = "`..=`"
+    show TokAndEquals    = "`and=`"
+    show TokOrEquals = "`or=`"

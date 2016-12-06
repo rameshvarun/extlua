@@ -15,8 +15,8 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib, Language.ExtLua.Token, Language.ExtLua.Syntax, Language.ExtLua.Lexer, Language.ExtLua.Parser
-  other-modules:       Language.ExtLua.LexerUtils
+  exposed-modules:     Lib, Language.ExtLua.Token, Language.ExtLua.Syntax, Language.ExtLua.Lexer, Language.ExtLua.Parser, Language.ExtLua.Printer
+  other-modules:       Language.ExtLua.LexerUtils, Text.PrettyPrint.Leijen
   build-depends:       base >= 4.7 && < 5, alex-tools >= 0.1.1.0 && < 0.2, text >= 1.2 && < 1.3, deepseq, array >= 0.4 && < 0.6
   build-tools:         alex, happy
   default-language:    Haskell2010

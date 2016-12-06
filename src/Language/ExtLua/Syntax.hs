@@ -35,6 +35,8 @@ data Stat a
     | LocalFunAssign a (Name a) (FunBody a) -- ^local function \<var\> (..) .. end
     | LocalAssign a [Name a] (Maybe [Exp a]) -- ^local var1, var2 .. = exp1, exp2 ..
     | EmptyStat a -- ^/;/
+
+    | Assignop a (Assignop a) [Var a] [Exp a] -- +=. -=. *= etc statements
     deriving (Show, Eq, Functor, Data, Typeable, Generic)
 
 data Exp a
@@ -55,6 +57,12 @@ data Var a
     | Select a (PrefixExp a) (Exp a) -- ^/table[exp]/
     | SelectName a (PrefixExp a) (Name a) -- ^/table.variable/
     deriving (Show, Eq, Functor, Data, Typeable, Generic)
+
+data Assignop a = AddEquals a | SubEquals a | MulEquals a | DivEquals a
+  | ExpEquals a | ModEquals a | ConcatEquals a | AndEquals a | OrEquals a
+  | IDivEquals a | ShiftLEquals a | ShiftREquals a | BAndEquals a | BOrEquals a
+  | BXorEquals a
+  deriving (Show, Eq, Functor, Data, Typeable, Generic)
 
 data Binop a = Add a | Sub a | Mul a | Div a | Exp a | Mod a | Concat a
     | LT a | LTE a | GT a | GTE a | EQ a | NEQ a | And a | Or a
@@ -306,3 +314,5 @@ instance NFData a => NFData (FunDef a)
 instance NFData a => NFData (FunBody a)
 instance NFData a => NFData (FunCall a)
 instance NFData a => NFData (FunArg a)
+
+instance NFData a => NFData (Assignop a)
