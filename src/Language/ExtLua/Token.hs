@@ -81,11 +81,14 @@ data Token
   | TokDDotEquals         -- ^..=
   | TokOrEquals           -- ^or=
   | TokAndEquals          -- ^and=
+  | TokDSlashEquals       -- //=
+  | TokAmpersandEquals    -- &=
+  | TokPipeEquals         -- |=
 
-  -- AssignOps for Lua 5.3
-  -- | TokDSlashEquals       -- //=
-  -- | TokAmpersandEquals    -- &=
-  -- | TokPipeEquals         -- |=
+  -- Arrow functions extension
+  | TokRightArrow         -- ^->
+  | TokRightFatArrow      -- ^=>
+
     deriving Eq
 
 instance Show Token where

@@ -140,6 +140,12 @@ tokens :-
     <0> "<<"  { lexeme TokDLT }
     <0> ">>"  { lexeme TokDGT }
 
+    -- AsignOp Extension Operators
+    <0> "+="   { lexeme TokPlusEquals }
+    <0> "-="   { lexeme TokMinusEquals }
+    <0> "*="   { lexeme TokStarEquals }
+    <0> "/="   { lexeme TokSlashEquals }
+
     <state_sstring,state_dstring> \\ .  { invalidEsc }
     <state_sstring,state_dstring> \n { unterminatedString }
 

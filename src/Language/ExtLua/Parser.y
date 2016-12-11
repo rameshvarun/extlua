@@ -88,6 +88,12 @@ float         { Lexeme { lexemeToken = TokFloat     } }
 literalString { Lexeme { lexemeToken = TokSLit      } }
 ident         { Lexeme { lexemeToken = TokIdent     } }
 
+-- AssignOp Extension
+'+='           { Lexeme { lexemeToken = TokPlusEquals      } }
+'-='           { Lexeme { lexemeToken = TokMinusEquals     } }
+'*='           { Lexeme { lexemeToken = TokStarEquals      } }
+'/='           { Lexeme { lexemeToken = TokSlashEquals     } }
+
 %monad { Either (SourceRange, String) }
 %error { errorP }
 
@@ -168,6 +174,10 @@ stat ::                                                   { Stat SourceRange    
   | 'for' name '=' exp ',' exp opt(step) 'do' block error {% noEndP $1 }
   | 'for' namelist 'in' explist 'do' block error          {% noEndP $1 }
 
+  -------- AssignOp extension ----------------------------
+  | varlist '+=' explist                                  { at (head $1,last $3) Assignop (at $2 AddEquals) $1 $3 }
+  | varlist '-=' explist                                  { at (head $1,last $3) Assignop (at $2 SubEquals) $1 $3 }
+
 elseif : 'elseif' exp 'then' block { ($2,$4) }
 else   : 'else' block { $2 }
 step   : ',' exp { $2 }
@@ -185,6 +195,7 @@ prefixexp ::                  { PrefixExp SourceRange }
 functioncall ::               { FunCall SourceRange       }
   : prefixexp            args { at ($1,$2) NormalFunCall $1 $2 }
   | prefixexp methodname args { at ($1,$3) MethodCall $1 $2 $3 }
+  | prefixexp '::' name  args { at ($1,$4) BoundFunctionCall $1 $3 $4 }
 
 funcname ::                               { FunName SourceRange              }
   : name many(dottedname) opt(methodname) { at ($1,($2,$3)) FunName $1 $2 $3 }
@@ -196,6 +207,7 @@ var ::                    { Var SourceRange               }
   : name                  { at $1 VarName $1              }
   | prefixexp '[' exp ']' { at ($1,$4) Select $1 $3       }
   | prefixexp '.' name    { at ($1,$3) SelectName $1 $3   }
+  | '.' name              { at ($2) SelfSelectName $2   }
 
 exp ::                     { Exp SourceRange              }
   : 'nil'                  { at $1 Nil                    }

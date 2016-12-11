@@ -56,6 +56,7 @@ data Var a
     = VarName a (Name a) -- ^variable
     | Select a (PrefixExp a) (Exp a) -- ^/table[exp]/
     | SelectName a (PrefixExp a) (Name a) -- ^/table.variable/
+    | SelfSelectName a (Name a) -- ^/$variable/
     deriving (Show, Eq, Functor, Data, Typeable, Generic)
 
 data Assignop a = AddEquals a | SubEquals a | MulEquals a | DivEquals a
@@ -103,6 +104,7 @@ data FunBody a = FunBody a [Name a] (Maybe a) (Block a) -- ^(args, vararg, block
 data FunCall a
     = NormalFunCall a (PrefixExp a) (FunArg a) -- ^/prefixexp ( funarg )/
     | MethodCall a (PrefixExp a) (Name a) (FunArg a) -- ^/prefixexp : name ( funarg )/
+    | BoundFunctionCall a (PrefixExp a) (Name a) (FunArg a) -- ^/prefixexp :: name ( funarg )/
     deriving (Show, Eq, Functor, Data, Typeable, Generic)
 
 data FunArg a

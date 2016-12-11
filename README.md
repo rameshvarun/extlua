@@ -3,10 +3,10 @@
 ### Assign Operators
 ```lua
 x += 1
-x, y -= 2
+x, y -= 2, 3
 ```
 
-### Lambda
+### Arrow Functions
 ```lua
 local identity = x -> x
 local multiarg = (x, y, ...) -> x + y
@@ -32,10 +32,10 @@ end
 ```lua
 local counter = {i = 0}
 function counter:increment()
-  @i += 1 -- @i corresponds to self.i
+  .i += 1 -- .i corresponds to self.i
 end
 function counter:incrementAndPrint()
-  print(@i)
+  print(.i)
   :increment() -- :increment() expands to self:increment
 end
 
