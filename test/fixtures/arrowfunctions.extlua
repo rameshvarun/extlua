@@ -1,0 +1,5 @@
+local identity = x -> x
+local multiarg = (x, y, ...) -> x + y
+local noarg = () -> 3
+local block = x -> do print(x) end
+local fatarrow = (x) => self.value + x

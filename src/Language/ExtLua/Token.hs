@@ -85,10 +85,14 @@ data Token
   | TokAmpersandEquals    -- &=
   | TokPipeEquals         -- |=
 
-  -- Arrow functions extension
+  -- Arrow function extension
   | TokRightArrow         -- ^->
   | TokRightFatArrow      -- ^=>
 
+  -- Self Sugar extension
+  | TokDollar             -- ^$
+  | TokAt                 -- ^@
+  
     deriving Eq
 
 instance Show Token where
