@@ -1,6 +1,6 @@
 # ExtLua (Abandoned)
 
-ExtLua is an extension of Lua designed to enhance game development. Right now, I'm mostly adding syntactic extensions like arrow functions and class syntex, which puts ExtLua in the same class as languages like MoonScript. My eventual goal is to add things like static checking of inheritance and module exports, and maybe even some form of static typing.
+ExtLua is an extension of Lua designed to enhance game development. Right now, I'm mostly adding syntactic extensions like arrow functions and class syntax, which puts ExtLua in the same class as languages like MoonScript. My eventual goal is to add things like static checking of inheritance and module exports, and maybe even some form of static typing.
 
 Unlike MoonScript, I intend to stick to lua-like syntax, using keywords like `do` and `end`.
 
