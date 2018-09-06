@@ -1,4 +1,4 @@
-# ExtLua (WIP)
+# ExtLua (Abandoned)
 
 ExtLua is an extension of Lua designed to enhance game development. Right now, I'm mostly adding syntactic extensions like arrow functions and class syntex, which puts ExtLua in the same class as languages like MoonScript. My eventual goal is to add things like static checking of inheritance and module exports, and maybe even some form of static typing.
 
@@ -27,6 +27,20 @@ end
 ({1, 2, 3, 4})::map(x -> x ^ 2)
 ```
 
+## Planned Extensions
+
+### Self Sugar
+```lua
+local counter = {i = 0}
+function counter:increment()
+  $i += 1 -- $i corresponds to self.i
+end
+function counter:incrementAndPrint()
+  print(.i)
+  @increment() -- @increment() expands to self:increment
+end
+```
+
 ### Arrow Functions
 This is a shortened syntax for anonymous functions, making a lot of patterns in Lua much more concise.
 ```lua
@@ -39,24 +53,10 @@ local block = x -> do print(x) end
 local fatarrow = (x) => $value + x
 ```
 
-## Planned Extensions
-
 ### Default Arguments
 ```lua
 function f(a = 3)
   print(a)
-end
-```
-
-### Self Sugar
-```lua
-local counter = {i = 0}
-function counter:increment()
-  $i += 1 -- $i corresponds to self.i
-end
-function counter:incrementAndPrint()
-  print(.i)
-  @increment() -- @increment() expands to self:increment
 end
 ```
 
