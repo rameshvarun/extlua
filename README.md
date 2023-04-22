@@ -1,4 +1,4 @@
-# ExtLua (Abandoned) [![Build Status](https://travis-ci.org/rameshvarun/extlua.svg?branch=master)](https://travis-ci.org/rameshvarun/extlua)
+# ExtLua
 
 ExtLua is an extension of Lua designed to enhance game development. Right now, I'm mostly adding syntactic extensions like arrow functions and class syntax, which puts ExtLua in the same class as languages like MoonScript. My eventual goal is to add things like static checking of inheritance and module exports, and maybe even some form of static typing.
 
